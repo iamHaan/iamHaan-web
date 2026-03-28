@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Fake khung LQ</title>
+
+<style>
+body {
+  text-align: center;
+  font-family: Arial;
+  background: #e6faff;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+select, input, button {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 10px;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.card {
+  position: relative;
+  width: 300px;
+  margin: 20px auto;
+}
+
+.layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.ten {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  text-shadow: 0 0 5px black;
+}
+
+.lv {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  color: yellow;
+  font-weight: bold;
+}
+
+#hangBox {
+  display: none;
+}
+
+button {
+  background: #00cfff;
+  color: white;
+  border: none;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Fake khung LQ</h2>
+
+<!-- TƯỚNG -->
+<label>Chọn tướng</label>
+<select id="tuong">
+<option value="airi">Airi</option>
+<option value="alice">Alice</option>
+<option value="allain">Allain</option>
+<option value="amity">Amily</option>
+<option value="annette">Annette</option>
+<option value="arduin">Arduin</option>
+<option value="arthur">Arthur</option>
+<option value="astrid">Astrid</option>
+<option value="aya">Aya</option>
+<option value="azzenka">Azzen'Ka</option>
+<option value="baldum">Baldum</option>
+<option value="bonnie">Bonnie</option>
+<option value="capheny">Capheny</option>
+<option value="celica">Celica</option>
+<option value="cresht">Cresht</option>
+<option value="dextra">Dextra</option>
+<option value="dieuthuyen">Điêu Thuyền</option>
+<option value="elsu">Elsu</option>
+<option value="enzo">Enzo</option>
+<option value="florentino">Florentino</option>
+<option value="grakk">Grakk</option>
+<option value="hayate">Hayate</option>
+<option value="ilumia">Ilumia</option>
+<option value="krixi">Krixi</option>
+<option value="lauriel">Lauriel</option>
+<option value="liliana">Liliana</option>
+<option value="lindis">Lindis</option>
+<option value="maloch">Maloch</option>
+<option value="murad">Murad</option>
+<option value="nakroth">Nakroth</option>
+<option value="ngokhong">Ngộ Không</option>
+<option value="omen">Omen</option>
+<option value="raz">Raz</option>
+<option value="tulen">Tulen</option>
+<option value="valhein">Valhein</option>
+<option value="veera">Veera</option>
+<option value="violet">Violet</option>
+<option value="yena">Yena</option>
+<option value="zata">Zata</option>
+</select>
+
+<!-- SKIN -->
+<label>Skin</label>
+<select id="skin"></select>
+
+<!-- TRI KỈ -->
+<div class="row">
+<div>
+<label>Tri kỉ</label>
+<select id="triki">
+<option value="">Không có</option>
+<option value="setlove.png">Set Love</option>
+<option value="anhem.png">Anh Em</option>
+</select>
+</div>
+
+<div>
+<label>Level</label>
+<input type="number" id="level">
+</div>
+</div>
+
+<!-- RANK -->
+<div class="row">
+<div>
+<label>Rank</label>
+<select id="rank">
+<option value="dong.png">Đồng</option>
+<option value="bac.png">Bạc</option>
+<option value="vang.png">Vàng</option>
+<option value="bachkim.png">Bạch Kim</option>
+<option value="kimcuong.png">Kim Cương</option>
+<option value="caothu.png">Cao Thủ</option>
+<option value="chieutuong.png">Chiến Tướng</option>
+<option value="chienthan.png">Chiến Thần</option>
+<option value="thachdau.png">Thách Đấu</option>
+</select>
+</div>
+
+<div id="hangBox">
+<label>Hạng</label>
+<input type="number" id="hang">
+</div>
+</div>
+
+<!-- TÊN -->
+<input type="text" id="ten" placeholder="Nhập tên">
+
+<br><br>
+
+<button onclick="taoAnh()">Tạo ảnh</button>
+
+<!-- PREVIEW -->
+<div class="card">
+<img id="hero" class="layer">
+<img id="rankImg" class="layer">
+<img id="khung" class="layer" src="frame1.png">
+<div id="tenText" class="ten"></div>
+<div id="lvText" class="lv"></div>
+</div>
+
+<script>
+// ===== SKIN =====
+let skins = {
+ airi: [
+  {name:"Mặc định", file:"macdinh"},
+  {name:"Ninja xanh lá", file:"ninjaxanhla"},
+  {name:"Thích Khách", file:"thichkhach"},
+  {name:"Phó Kiếm Đạo", file:"phokiemdao"},
+  {name:"Đặc Công Tử Điệp", file:"tudiep"},
+  {name:"Quái Xế Công Nghệ", file:"quaixecongnghe"},
+  {name:"Cấm Vệ Nguyệt Tộc", file:"camvenguyettoc"},
+  {name:"Kiemono", file:"kiemono"},
+  {name:"Bạch Kiemono", file:"bachkiemono"},
+  {name:"Tiệc Bãi Biển", file:"airitam"},
+  {name:"Lễ Hội Mùa Xuân", file:"lehoimuaxuan"},
+  {name:"Thánh Nữ Xiêm La", file:"thanhnuxiemla"},
+  {name:"Bích Hải Thánh Nữ", file:"bichhaithanhnu"},
+  {name:"Mị Hồ", file:"miho"},
+  {name:"Thứ Nguyên Vệ Thần", file:"thunguyenvethan"},
+  {name:"Búp Bê Mộng Mị", file:"bupbemongmi"},
+  {name:"Ninja Ẩm Thực", file:"ninjaamthuc"},
+  {name:"Quản Lý Tài Năng", file:"quanlytainang"}
+]
+  
+  
+};
+
+// load skin
+function loadSkin(){
+  let t = tuong.value;
+  skin.innerHTML = "";
+
+  if(!skins[t]){
+    skin.innerHTML = "<option>Chưa có skin</option>";
+    return;
+  }
+
+  skins[t].forEach(s=>{
+    let op = document.createElement("option");
+    op.text = s.name;
+    op.value = s.file;
+    skin.add(op);
+  });
+}
+
+// tạo ảnh
+function taoAnh(){
+  hero.src = "tuong/" + tuong.value + "/" + skin.value + ".png";
+  rankImg.src = "rank/" + rank.value;
+
+  tenText.innerText = ten.value;
+
+  if(triki.value==""){
+    lvText.innerText="";
+  } else {
+    lvText.innerText="Lv " + level.value;
+  }
+}
+
+// hiện ô hạng
+rank.addEventListener("change", ()=>{
+  if(rank.value === "thachdau.png"){
+    hangBox.style.display = "block";
+  } else {
+    hangBox.style.display = "none";
+  }
+});
+
+// load
+window.onload = ()=>{
+  loadSkin();
+  rank.dispatchEvent(new Event("change"));
+};
+
+tuong.onchange = loadSkin;
+
+</script>
+
+</body>
+</html>
